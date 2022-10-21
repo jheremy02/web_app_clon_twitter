@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+
+import TweetsPage from "./components/tweets/TweetsPage.js"
+import MyForm from "./components/auth/LoginPage/Myform.js";
+import LoginPage, {  } from "./components/auth/LoginPage/LoginPage.js";
+import NewTweetPage from "./components/tweets/newTweetPage/NewTweetPage.js";
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <TweetsPage></TweetsPage>
+        <NewTweetPage/>
+        <LoginPage></LoginPage>
+        <MyForm></MyForm>
     </div>
   );
 }

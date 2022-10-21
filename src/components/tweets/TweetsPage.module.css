@@ -1,0 +1,14 @@
+.tweetsPage {
+    
+    font-family: Arial, sans-serif;
+    border-radius: 12px;
+    background-color: rgb(255, 219, 212);
+}
+
+
+.list_tweets {
+
+    border: 1px solid red;
+    border-radius: 12px;
+
+}
