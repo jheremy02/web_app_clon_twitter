@@ -29,3 +29,7 @@
     width: 144px;
     margin-left: 10px;
   }
+
+  .active {
+    color: rgb(13, 161, 219);
+  }

@@ -5,6 +5,6 @@ const tweetsBaseUrl="/api"
 export const gestLatestTweets=()=>{
 
     const url=`${tweetsBaseUrl}/tweets`
-console.log(url)
+    console.log(url)
     return client.get(url)
 }
