@@ -7,6 +7,7 @@ import Button, {  } from "../common/Button.js";
 import styles from "./TweetsPage.module.css"
 
 import Layout from "../layout/Layout.js";
+import { Link } from "react-router-dom";
 
 const TweetsPage= (props)=>{
     const [tweets,setTweets] = useState([])//inicializamos el estdo de la variable tweets como un array vacio
@@ -30,10 +31,10 @@ const TweetsPage= (props)=>{
 
     
 
-    return <Layout isLogged={props.isLogged} onLogout={props.onLogout}>
+    return <Layout >
         <div className={"tweetsPage "+styles.tweetsPage+" "+"w-96 h-auto "}>
         <ul className={`${styles.list_tweets}  flex flex-col gap-4 `} style={{padding:tweets?"32px":"0px"}}>
-           {tweets.map((tweet)=> <li key={tweet.id}>{tweet.content}</li> )}
+           {tweets.map((tweet)=> <li key={tweet.id}><Link to={`/tweets/${tweet.id}`}>{tweet.content}</Link></li> )}
         </ul>
 
         <Button>Sucess</Button>

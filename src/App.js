@@ -9,6 +9,9 @@ import MySecondForm from "./components/auth/LoginPage/MySecondForm.js";
 import MyFormTest from "./components/auth/LoginPage/MyFormTest.js"; 
 import { useState } from "react";
 import { Routes,Route,NavLink,Navigate } from "react-router-dom";
+import RequireAuth from "./components/auth/RequireAuth.js";
+
+import AuthContext from "./components/auth/context";
 
 function App({isInitializeLogged}) {
 
@@ -24,20 +27,25 @@ function App({isInitializeLogged}) {
     setIsLogged(false)
   }
 
-  
 
   return (
 
-    <Routes>
+    <AuthContext.Provider value={{isLogged,handleLogin,handleLogout}} >
+       <Routes>
       <Route path="/login" element={<LoginPage onLogin={handleLogin}></LoginPage>} />
 
-      <Route path="/tweets" element={<TweetsPage isLogged={isLogged} onLogout={handleLogout}></TweetsPage>} />
-      <Route path="/tweets/:idtweet" element={<TweetPage/>}/>
-      <Route path="/tweets/new" element={<NewTweetPage></NewTweetPage>} />
+      <Route path="/tweets" element={<TweetsPage ></TweetsPage>} />
+      <Route path="/tweets/:idtweet" element={<TweetPage />}/>
+      <Route path="/tweets/new" element={<RequireAuth >
+        <NewTweetPage ></NewTweetPage>
+      </RequireAuth>} />
       <Route path="/404" element={<div><h1>Not Found</h1></div>} />
       <Route path="/" element={<Navigate to="tweets"/>}/>
       <Route path="/*" element={<Navigate to="404" />} />
     </Routes>
+    </AuthContext.Provider>
+
+   
 
     
   );

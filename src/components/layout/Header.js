@@ -1,23 +1,17 @@
 
 import classNames from 'classnames';
-import Button from '../common/Button.js';
+
 import { Link , NavLink} from "react-router-dom";
 
 import { ReactComponent as Icon } from '../../assets/logo_twitter.svg';
 
 import './Header.css';
-import { logout } from '../auth/LoginPage/service.js';
 
-function Header({ className , isLogged , onLogout }) {
+import AuthButton from '../auth/AuthButton.js';
+
+function Header({ className  }) {
 
 
-  async function handleLogoutClick() {
-
-    await logout()
-    onLogout()
-    
-
-  }
 
   return (
     <header className={classNames('header', className)}>
@@ -35,13 +29,7 @@ function Header({ className , isLogged , onLogout }) {
         <NavLink to="/tweets" className={({isActive})=>(isActive?"active":"") } end>
           Tweets
         </NavLink>
-
-        { isLogged?<Button className="header-button" onClick={handleLogoutClick}>
-          Logout
-        </Button>:<Button variant="primary" className="header-button">
-        Login
-      </Button> }
-       
+        <AuthButton className="header-button"></AuthButton>
       </nav>
     </header>
   );

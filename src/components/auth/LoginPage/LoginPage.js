@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../common/Button";
+import AuthContext from "../context";
 import { login } from "./service.js";
 
 
 function LoginPage(props) {
     
+  const {handleLogin:onLogin}=useContext(AuthContext)
 const [credentials,setCredentials] = useState({username:'', password:'',remember:false})
 const [isLoading,setIsLoading]=useState(false)
 
@@ -15,6 +18,10 @@ const firtsStateClassName='bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-f
 const activeClassName="border-solid border-2 border-green-500"
 
 const [className,setClassName]=useState(firtsStateClassName)
+
+const location=useLocation()
+
+const navigate=useNavigate()
 
 function handleActiveClass() {
   setClassName()
@@ -42,7 +49,10 @@ async function  handleSubmit(event) {
     await login(credentials)
     
     setIsLoading(false)
-    props.onLogin()
+    onLogin()
+    const from=location.state?.from?.pathname || "/";
+    console.log(from)
+    navigate(from,{replace:true})
 
   } catch (error) {
     setIsLoading(false)
