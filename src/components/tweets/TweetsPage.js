@@ -31,8 +31,7 @@ const TweetsPage= (props)=>{
 
     
 
-    return <Layout >
-        <div className={"tweetsPage "+styles.tweetsPage+" "+"w-96 h-auto "}>
+    return <div className={"tweetsPage "+styles.tweetsPage+" "+"w-96 h-auto "}>
         <ul className={`${styles.list_tweets}  flex flex-col gap-4 `} style={{padding:tweets?"32px":"0px"}}>
            {tweets.map((tweet)=> <li key={tweet.id}><Link to={`/tweets/${tweet.id}`}>{tweet.content}</Link></li> )}
         </ul>
@@ -40,7 +39,7 @@ const TweetsPage= (props)=>{
         <Button>Sucess</Button>
 
         </div>
-    </Layout>
+    
 
 }
 

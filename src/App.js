@@ -12,6 +12,7 @@ import { Routes,Route,NavLink,Navigate } from "react-router-dom";
 import RequireAuth from "./components/auth/RequireAuth.js";
 
 import AuthContext from "./components/auth/context";
+import Layout from "./components/layout/Layout.js";
 
 function App({isInitializeLogged}) {
 
@@ -34,11 +35,16 @@ function App({isInitializeLogged}) {
        <Routes>
       <Route path="/login" element={<LoginPage onLogin={handleLogin}></LoginPage>} />
 
-      <Route path="/tweets" element={<TweetsPage ></TweetsPage>} />
-      <Route path="/tweets/:idtweet" element={<TweetPage />}/>
-      <Route path="/tweets/new" element={<RequireAuth >
+      <Route path="/tweets" element={<Layout></Layout>}>
+        <Route index element={<TweetsPage></TweetsPage>}></Route>
+        <Route path=":tweetId" element={<TweetPage />}/>
+        <Route path="new" element={<RequireAuth >
         <NewTweetPage ></NewTweetPage>
-      </RequireAuth>} />
+        </RequireAuth>} />
+
+      </Route>
+      
+      
       <Route path="/404" element={<div><h1>Not Found</h1></div>} />
       <Route path="/" element={<Navigate to="tweets"/>}/>
       <Route path="/*" element={<Navigate to="404" />} />
