@@ -7,4 +7,4 @@ export const AuthContextProvider=AuthContext.Provider
 export const AuthContextConsumer=AuthContext.Consumer
 
 
-export default AuthContext
+export default AuthContext 

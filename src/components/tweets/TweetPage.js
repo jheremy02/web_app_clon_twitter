@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 import Page from '../layout/Page';
 import { getTweet } from './service';
@@ -8,7 +8,7 @@ import TweetsPage from './TweetsPage';
 
 //toda clase componente extiende de React.component
 
-/*
+
 
 class TweetPage extends React.Component {
   
@@ -70,16 +70,28 @@ class TweetPage extends React.Component {
   }
 }
 
-*/
 
 
-const TweetPageFunction = (props) => {
 
+
+  const TweetPageFunction = (props) => {
+
+  const refElement=useRef(null)
   const [tweet,setTweet]=useState(null)
+
+  useEffect(()=>{
+    console.log(refElement.current)
+  },[])
+
 
   //obtenemos el parametro de la url
   const {tweetId}=useParams()
+
+  return  <TweetPage ref={refElement} tweetId={tweetId}/>
   
+};
+  
+  /** 
   useEffect( ()=>{
 
     async function getData() {
@@ -102,5 +114,8 @@ const TweetPageFunction = (props) => {
     <div>{tweet?JSON.stringify(tweet):"Nothing to show"}</div>
   </Page> 
 };
+
+
+ */
 
 export default TweetPageFunction;

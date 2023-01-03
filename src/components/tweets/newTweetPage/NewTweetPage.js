@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState,useRef , useEffect } from "react";
 import Page from "../../layout/Page";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate  } from "react-router-dom";
 import { createTweet } from "../service";
 
 const MAX_CHARACTERS=260
@@ -11,6 +11,10 @@ const NewTweetPage= (props)=>{
     const [content,setContent]=useState("")
     const [createdTweet,setCreatedTweet]=useState(null)
     const [error,setError]=useState(null)
+    const textAreaRef=useRef(null)
+    const mountedRef=useRef(null)
+    const rendersCounter=useRef(0)
+    let render=0
 
    function handleInput(event) {
        setContent(event.target.value)
@@ -33,6 +37,25 @@ const NewTweetPage= (props)=>{
         
    }
 
+  
+
+   useEffect(()=>{
+    
+    console.log(textAreaRef)
+    textAreaRef.current.focus()
+
+    
+   },[])
+
+   useEffect(()=>{
+    rendersCounter.current+=1
+    console.log('variable useref ',rendersCounter.current)
+    console.log('variable normal ',render+=1)
+    
+   })
+
+   console.log(rendersCounter.current)
+
 
    if (createdTweet) {
     return <Navigate to={`/tweets/${createdTweet.id}`} ></Navigate>
@@ -41,6 +64,9 @@ const NewTweetPage= (props)=>{
    if (error?.status===401) {
     return <Navigate to="/login"></Navigate>
    }
+
+   
+   
 
 
 
@@ -57,7 +83,8 @@ const NewTweetPage= (props)=>{
       <form className="w-full he" onSubmit={handleSubmit}>
       <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
        
-       <textarea className="textarea w-full border-none outline-none focus:outline-none" placeholder="Hey What's up ?" onInput={handleInput} maxLength={MAX_CHARACTERS}></textarea>
+       <textarea ref={textAreaRef} className="textarea w-full border-none outline-none focus:outline-none" placeholder="Hey What's up ?" onInput={handleInput} maxLength={MAX_CHARACTERS}></textarea>
+       <input  type="text"></input>
        <div className="mt-4 flex items-center justify-between">
            <div className="text-sm text-sky-500 font-semibold">
            {characters}
