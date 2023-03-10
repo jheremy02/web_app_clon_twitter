@@ -50,7 +50,9 @@ async function  handleSubmit(event) {
     
     setIsLoading(false)
     onLogin()
+    console.log(location)
     const from=location.state?.from?.pathname || "/";
+    console.log("print current URL")
     console.log(from)
     navigate(from,{replace:true})
 

@@ -45,6 +45,7 @@ function App({isInitializeLogged}) {
       </Route>
       
       
+      
       <Route path="/404" element={<div><h1>Not Found</h1></div>} />
       <Route path="/" element={<Navigate to="tweets"/>}/>
       <Route path="/*" element={<Navigate to="404" />} />

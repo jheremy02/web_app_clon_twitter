@@ -5,6 +5,7 @@ const client= axios.create({
     baseURL:process.env.REACT_APP_API_BASE_URL
 })
 
+console.log(process.env.REACT_APP_API_BASE_URL)
 
 // me saca la data especifica del response
 client.interceptors.response.use(response=>response.data , error=> {
