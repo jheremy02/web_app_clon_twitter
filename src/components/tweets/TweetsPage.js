@@ -8,10 +8,13 @@ import styles from "./TweetsPage.module.css"
 
 import Layout from "../layout/Layout.js";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getTweets } from "../../store/selectors.js";
+import { tweetsLoad } from "../../store/actions.js";
 
 const TweetsPage= (props)=>{
-    const [tweets,setTweets] = useState([])//inicializamos el estdo de la variable tweets como un array vacio
-
+   const tweets=useSelector(getTweets)//inicializamos el estdo de la variable tweets como un array vacio
+  const dispatch=useDispatch()
 
     //uso un efecto para que haga la llamada al api despues de renderizarse
     useEffect(  ()=>{
@@ -19,9 +22,9 @@ const TweetsPage= (props)=>{
             let data=[]
             async function getTweets () {
                 data=await gestLatestTweets()
-                console.log(data)
+
                 //una vez se traiga los datos del api , actualizara los estados
-                setTweets(data)
+                dispatch(tweetsLoad(data))
             }
 
             getTweets()

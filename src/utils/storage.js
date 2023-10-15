@@ -2,7 +2,7 @@ export const storage={
 
     get(key){
         const value=localStorage.getItem(key)
-        console.log(value)
+        
         if (!value) {
             return null
         } else {

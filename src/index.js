@@ -1,29 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import { storage } from './utils/storage';
-import { setAuthorizationHeader } from './api/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import { storage } from "./utils/storage";
+import { setAuthorizationHeader } from "./api/client";
 
 import { BrowserRouter as Router } from "react-router-dom";
+import configureStore from "./store";
+import { Provider } from "react-redux";
 
-
-console.log(process.env.REACT_APP_API_BASE_URL)
-
-const accessToken=storage.get('auth')
+const accessToken = storage.get("auth");
+const store = configureStore({ auth: !!accessToken, tweets: [] });
 
 if (accessToken) {
-  setAuthorizationHeader(accessToken)
+  setAuthorizationHeader(accessToken);
 }
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <Provider store={store}>
     <Router>
-      <App isInitializeLogged={!!accessToken} />
+      <App store={store}/>
     </Router>
+    </Provider>
+    
   </React.StrictMode>
 );
-
-

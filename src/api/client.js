@@ -9,7 +9,7 @@ console.log(process.env.REACT_APP_API_BASE_URL)
 
 // me saca la data especifica del response
 client.interceptors.response.use(response=>response.data , error=> {
-
+    console.log()
     if (!error.response) {
         return Promise.reject({message:error.message})
     } else {

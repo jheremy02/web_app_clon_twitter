@@ -13,19 +13,29 @@ import RequireAuth from "./components/auth/RequireAuth.js";
 
 import AuthContext from "./components/auth/context";
 import Layout from "./components/layout/Layout.js";
+import { AUTH_LOGOUT } from "./store/types.js";
+import { authLogin, authLogout } from "./store/actions.js";
+import { useDispatch, useSelector } from "react-redux";
 
-function App({isInitializeLogged}) {
+function App({store}) {
 
-  const [isLogged,setIsLogged]=useState(isInitializeLogged)
+  const isLogged=useSelector(state=>state.auth)
+  const selector=useSelector(state=>state.auth)
+  const dispatch=useDispatch()
   const [isLoading,setIsLoading]=useState(false)
 
 
   function handleLogin() {
-    setIsLogged(true)
+    //store.dispatch(authLogin())
+    //setIsLogged(true)
+    dispatch(authLogin())
   }
 
   function handleLogout() {
-    setIsLogged(false)
+
+    //store.dispatch(authLogout())
+    //setIsLogged(false)
+  
   }
 
 

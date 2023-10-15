@@ -4,21 +4,25 @@ import { logout } from '../auth/LoginPage/service.js';
 import { useContext, useEffect, useRef } from "react";
 import AuthContext from "./context";
 import { Link } from "react-router-dom";
+import { authLogout } from "../../store/actions";
+import { useDispatch, useSelector } from "react-redux";
 function AuthButton(params) {
 
     const refButton=useRef(null)
-    const {isLogged,handleLogout:onLogout}=useContext(AuthContext)
-
+    const isLogged=useSelector(state=>state.auth)
+    
+    const dispatch=useDispatch()
   async function handleLogoutClick() {
 
     await logout()
-    onLogout()
+    dispatch(authLogout())
+   // onLogout()
     
   }
     
   useEffect(()=>{
     
-    console.log(refButton.current)
+   
   },[])
 
 
